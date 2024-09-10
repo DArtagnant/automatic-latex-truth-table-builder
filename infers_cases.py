@@ -14,6 +14,8 @@ class Table:
             self._table.append(list(possibilite))
 
     def insert_case(self, sentence):
+        if sentence in self._header: return None
+        self._header.append(sentence)
         for line in self._table:
             variables_values = dict(zip(self._variables, line))
             line.append(sentence.evaluate(variables_values))
@@ -25,7 +27,7 @@ def get_headers(assertion):
     liste = get_headers(assertion.a)
     if isinstance(assertion, logic.DoubleOp):
         liste.extend(get_headers(assertion.b))
-    liste.append(repr(assertion))
+    liste.append(assertion)
     return liste
 
 
@@ -45,6 +47,9 @@ if __name__ == "__main__":
     b = logic.Variable("B")
     c = logic.Variable("C")
 
+    sentence = a | (b | a)
+
     table = Table(logic.L3, [a, b])
-    table.insert_case(a | b)
+    for cas in get_headers(sentence):
+        table.insert_case(cas)
     print([[repr(e) for e in line] for line in table._table])

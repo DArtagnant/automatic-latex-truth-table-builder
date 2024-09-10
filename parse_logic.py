@@ -21,6 +21,9 @@ class Variable(OpBase):
     def __repr__(self) -> str:
         return self._name
     
+    def str_latex(self):
+        return self._name
+    
     def evaluate(self, variables_values):
         return variables_values[self]
         # for key, value in variables_values.items():
@@ -45,6 +48,9 @@ class Not(Op):
             return Logic_True()
         else:
             return Logic_Unknown()
+    
+    def str_latex(self):
+        return r"(\lnot " + self.a.str_latex() + ")"
 
 class DoubleOp(Op):
     def __init__(self, a, b) -> None:
@@ -57,6 +63,9 @@ class Or(DoubleOp):
 
     def __repr__(self) -> str:
         return f"({self.a} ∨ {self.b})"
+    
+    def str_latex(self):
+        return "(" + self.a.str_latex() + r" \vee " + self.b.str_latex() + ")"
     
     def evaluate(self, variables_values):
         inside_a = self.a.evaluate(variables_values)
@@ -78,6 +87,9 @@ class And(DoubleOp):
 
     def __repr__(self) -> str:
         return f"({self.a} ∧ {self.b})"
+    
+    def str_latex(self):
+        return "(" + self.a.str_latex() + r" \wedge " + self.b.str_latex() + ")"
 
 class Logic_Value: pass
 
