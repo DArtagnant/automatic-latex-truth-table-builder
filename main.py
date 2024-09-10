@@ -5,7 +5,6 @@ import create_latex as latex
 
 a = logic.Variable("A")
 b = logic.Variable("B")
-c = logic.Variable("C")
 
 sentence = a | (b | a)
 
@@ -16,5 +15,4 @@ for case in cases_headers:
     table.insert_case(case)
 print([[repr(e) for e in line] for line in table._table])
 
-print(latex.create_latex(table._table,
-                         ['$' + e.str_latex() + '$' for e in table._header]))
+print(latex.create_latex(table._table, table._header))
