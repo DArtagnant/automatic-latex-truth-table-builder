@@ -45,6 +45,6 @@ if __name__ == "__main__":
     b = logic.Variable("B")
     c = logic.Variable("C")
 
-    table = Table(logic.L2, [a, b])
+    table = Table(logic.L3, [a, b])
     table.insert_case(a | b)
     print([[repr(e) for e in line] for line in table._table])
