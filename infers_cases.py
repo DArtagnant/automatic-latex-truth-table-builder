@@ -15,7 +15,9 @@ class Table:
         self._table = sorted(self._table)
 
     def insert_case(self, sentence):
-        if sentence in self._header: return None
+        for e in self._header:
+            if repr(sentence) == repr(e):
+                return None
         self._header.append(sentence)
         for line in self._table:
             variables_values = dict(zip(self._variables, line))
