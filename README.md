@@ -10,4 +10,4 @@ See [`main.py`](main.py) for an explanation of its use.
 Un programme python permettant de générer des tables de vérité à partir d'une assertion en logique propositionelle classique et de Lukasiewicz.
 Il nécessite l'installation de la librairie `tabulate`.
 
-Voir [`main.py`](main.py) pour des explication de son utilisation.
+Voir [`main.py`](main.py) pour une explication de son utilisation.
