@@ -145,6 +145,14 @@ class Logic_True(Logic_Value):
     
     def __repr__(self) -> str:
         return "V"
+    
+    # To sort the table
+    def __lt__(self, other):
+        assert isinstance(other, Logic_Value)
+        match other:
+            case Logic_True(): return True
+            case Logic_False(): return True
+            case Logic_Unknown(): return True
 
 class Logic_False(Logic_Value):
     _elem = None
@@ -157,6 +165,14 @@ class Logic_False(Logic_Value):
     def __repr__(self) -> str:
         return "F"
     
+    # To sort the table
+    def __lt__(self, other):
+        assert isinstance(other, Logic_Value)
+        match other:
+            case Logic_True(): return False
+            case Logic_False(): return True
+            case Logic_Unknown(): return True
+    
 
 class Logic_Unknown(Logic_Value):
     _elem = None
@@ -168,6 +184,14 @@ class Logic_Unknown(Logic_Value):
 
     def __repr__(self) -> str:
         return "I"
+    
+    # To sort the table
+    def __lt__(self, other):
+        assert isinstance(other, Logic_Value)
+        match other:
+            case Logic_True(): return False
+            case Logic_False(): return False
+            case Logic_Unknown(): return True
 
 L2 = {Logic_True(), Logic_False()}
 L3 = {Logic_True(), Logic_False(), Logic_Unknown()}

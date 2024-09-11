@@ -1,6 +1,6 @@
 
 __pycache__
-test*.py
+test*
 latex_test
 latex_output
 *.tex

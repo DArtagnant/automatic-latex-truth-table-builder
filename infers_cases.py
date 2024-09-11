@@ -12,6 +12,7 @@ class Table:
     def _insert_variables(self):
         for possibilite in product(self._logic_system, repeat=len(self._variables)):
             self._table.append(list(possibilite))
+        self._table = sorted(self._table)
 
     def insert_case(self, sentence):
         if sentence in self._header: return None

@@ -3,19 +3,18 @@ import infers_cases as cases
 import create_latex as latex
 
 # Define the variables you need here
-a = logic.Variable("A")
-b = logic.Variable("B")
+p = logic.Variable("P")
+q = logic.Variable("Q")
 
 # Write here the assertion for which you want to generate a truth table
 #   ¬ is ~ (not)
 #   ∨ is | (or)
 #   ∧ is & (and)
 #   ⇒ is >> (implies)
-assertion = a >> b
+assertion = q & p
 
 # List all the variables you use here
-variables = [a, b]
-
+variables = [p, q]
 
 table = cases.Table(
     logic.L3, # Select whether you want classical propositional logic (L2) or Lukasiewicz logic (L3)
