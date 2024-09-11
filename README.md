@@ -1,4 +1,4 @@
-
+# Automatic Latex Truth Table Builder
 
 A python program for generating truth tables from assertions in classical propositional logic and Lukasiewicz logic.
 It requires installation of the `tabulate` python library.
