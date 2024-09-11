@@ -6,13 +6,16 @@ import create_latex as latex
 a = logic.Variable("A")
 b = logic.Variable("B")
 
-sentence = a | (b | a)
+sentence = a | (b & a)
 
 variables = [a, b]
-table = cases.Table(logic.L3, variables)
-cases_headers = cases.get_headers(sentence)
-for case in cases_headers:
+table = cases.Table(logic.L2, variables)
+for case in cases.get_headers(sentence):
     table.insert_case(case)
+
+#debug check
 print([[repr(e) for e in line] for line in table._table])
 
-print(latex.create_latex(table._table, table._header))
+latex_tab = latex.create_latex_from_table(table)
+print(latex_tab)
+latex.save(latex_tab)

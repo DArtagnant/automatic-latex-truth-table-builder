@@ -88,6 +88,20 @@ class And(DoubleOp):
     def __repr__(self) -> str:
         return f"({self.a} ∧ {self.b})"
     
+    def evaluate(self, variables_values):
+        inside_a = self.a.evaluate(variables_values)
+        inside_b = self.b.evaluate(variables_values)
+        match inside_a, inside_b:
+            case Logic_True(), Logic_True(): return Logic_True()
+            case Logic_True(), Logic_False(): return Logic_False()
+            case Logic_True(), Logic_Unknown(): return Logic_Unknown()
+            case Logic_False(), Logic_True(): return Logic_False()
+            case Logic_False(), Logic_False(): return Logic_False()
+            case Logic_False(), Logic_Unknown(): return Logic_False()
+            case Logic_Unknown(), Logic_True(): return Logic_Unknown()
+            case Logic_Unknown(), Logic_False(): return Logic_False()
+            case Logic_Unknown(), Logic_Unknown(): return Logic_Unknown() 
+    
     def str_latex(self):
         return "(" + self.a.str_latex() + r" \wedge " + self.b.str_latex() + ")"
 
