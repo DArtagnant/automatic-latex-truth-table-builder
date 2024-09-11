@@ -6,10 +6,10 @@ import create_latex as latex
 a = logic.Variable("A")
 b = logic.Variable("B")
 
-sentence = a | (b & a)
+sentence = a >> b
 
 variables = [a, b]
-table = cases.Table(logic.L2, variables)
+table = cases.Table(logic.L3, variables)
 for case in cases.get_headers(sentence):
     table.insert_case(case)
 

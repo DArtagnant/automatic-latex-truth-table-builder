@@ -12,6 +12,10 @@ class OpBase:
     
     def __invert__(self):
         return Not(self)
+    
+    def __rshift__(self, other: Self):
+        assert isinstance(other, OpBase)
+        return Implies(self, other)
 
 class Variable(OpBase):
     def __init__(self, name:str) -> None:
@@ -104,6 +108,30 @@ class And(DoubleOp):
     
     def str_latex(self):
         return "(" + self.a.str_latex() + r" \wedge " + self.b.str_latex() + ")"
+
+class Implies(DoubleOp):
+    def __init__(self, a, b) -> None:
+        super().__init__(a, b)
+
+    def __repr__(self) -> str:
+        return f"({self.a} ⇒ {self.b})"
+    
+    def evaluate(self, variables_values):
+        inside_a = self.a.evaluate(variables_values)
+        inside_b = self.b.evaluate(variables_values)
+        match inside_a, inside_b:
+            case Logic_True(), Logic_True(): return Logic_True()
+            case Logic_True(), Logic_False(): return Logic_False()
+            case Logic_True(), Logic_Unknown(): return Logic_Unknown()
+            case Logic_False(), Logic_True(): return Logic_True()
+            case Logic_False(), Logic_False(): return Logic_True()
+            case Logic_False(), Logic_Unknown(): return Logic_True()
+            case Logic_Unknown(), Logic_True(): return Logic_True()
+            case Logic_Unknown(), Logic_False(): return Logic_Unknown()
+            case Logic_Unknown(), Logic_Unknown(): return Logic_True() 
+    
+    def str_latex(self):
+        return "(" + self.a.str_latex() + r" \Rightarrow " + self.b.str_latex() + ")"
 
 class Logic_Value: pass
 
